@@ -1,14 +1,9 @@
 #include <stdio.h>
 
-// propmt function
 void promptdisplay(){
     printf("> ");
 }
 
-// user input 
-void parseinput(char* userInput,int numberone,int numbertwo,char operation){
-    sscanf(userInput,"%i %s %i",numberone,operation,numbertwo);
-}
 int main(){
     int numberone;
     int numbertwo;
@@ -17,17 +12,24 @@ int main(){
     while(1){
         promptdisplay();
         fgets(userInput,sizeof(userInput),stdin);
-        if(sscanf(userInput,"%i %s %i",numberone,operation,numbertwo)){
-            parseinput(userInput,numberone,numbertwo,operation);
+        if(sscanf(userInput,"%i %c %i",&numberone,&operation,&numbertwo) == 3){
             if(operation == '+'){
                 printf("The Result : %d\n",numberone+numbertwo);
             }else if(operation =='-'){
                 printf("The Result : %d\n",numberone-numbertwo);
             }else if(operation == '*' || operation == 'x'){
                 printf("The Result : %d\n",numberone * numbertwo);
-            }else{
+            }else if(operation =='/'){
+                if(numbertwo != 0){
                 printf("The Result : %d\n",numberone/numbertwo);
+                }else{
+                 printf("Error: Division by zero!\n");
+                }
+            }else{
+                printf("Error : Invalid operation \n");
             }
+        }else{
+            printf("Error invalid input format \n");            
         }
     }
 
